@@ -10,6 +10,8 @@ require 'autoload.php';
  * ARCHIVOS DE CONFIGURACION
  */
 require 'config/app.php';
+require 'config/database.php';
+
 require 'src/Http/lib/helpers.php';
 
 $router = new Router;

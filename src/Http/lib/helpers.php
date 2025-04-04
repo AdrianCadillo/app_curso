@@ -9,15 +9,17 @@ use Windwalker\Edge\Loader\EdgeFileLoader;
 function View_(String $fileView,array $datos=[]){
 
     // DIECTORIO DE LAS VISTAS
-    $DirectorioView = str_replace(".","/",APP_DIRECTORIO_VIEWS.$fileView).".blade.php";
+    $DirectorioView = str_replace(".","/",APP_DIRECTORIO_VIEWS.$fileView);
+ 
+    /// obtenemos la extension del archivo
+    $FileExtension = file_exists($DirectorioView.".blade.php") ? '.blade.php' : '.php';
 
-    if(file_exists($DirectorioView)){
+    if(file_exists($DirectorioView.$FileExtension)){
         $EdgeView = new Edge(new EdgeFileLoader());
 
-        echo $EdgeView->render($DirectorioView,$datos);
+        echo $EdgeView->render($DirectorioView.$FileExtension,$datos);
     }else{
-        echo "ERROR 4040 NOT FOUND!!!";
+        echo "ERROR 404 NOT FOUND!!!";
     }
-
 
 }

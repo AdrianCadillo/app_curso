@@ -1,15 +1,7 @@
 <?php
+if(PHP_SESSION_ACTIVE != session_status()){
+    session_start();
+}
 $router->get("/categorias","CategoriaController@index");
-
-// $edge = new Edge(new EdgeFileLoader());
-
-    // $categorias = [
-    //     [
-    //         "name" => "BEBIDAS"
-    //     ],
-    //     [
-
-    //         "name" => "COMIDAS"
-    //     ]
-    // ];
-    // echo $edge->render("resources/views/categorias/index.blade.php",compact("categorias"));
+$router->post("/categoria/save","CategoriaController@store");
+$router->get("/prueba","CategoriaController@prueba");

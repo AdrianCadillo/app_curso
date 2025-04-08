@@ -5,3 +5,4 @@ if(PHP_SESSION_ACTIVE != session_status()){
 $router->get("/categorias","CategoriaController@index");
 $router->post("/categoria/save","CategoriaController@store");
 $router->get("/prueba","CategoriaController@prueba");
+$router->get("/dashboard","DashboardController@index");

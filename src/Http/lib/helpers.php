@@ -9,7 +9,7 @@ use Windwalker\Edge\Loader\EdgeFileLoader;
 function View_(String $fileView,array $datos=[]){
 
     // DIECTORIO DE LAS VISTAS
-    $DirectorioView = str_replace(".","/",APP_DIRECTORIO_VIEWS.$fileView);
+    $DirectorioView = str_replace(".","/","resources.views.".$fileView);
  
     /// obtenemos la extension del archivo
     $FileExtension = file_exists($DirectorioView.".blade.php") ? '.blade.php' : '.php';
@@ -22,4 +22,19 @@ function View_(String $fileView,array $datos=[]){
         echo "ERROR 404 NOT FOUND!!!";
     }
 
+}
+
+
+/** PARA ACCEDER A LAS VARIABLES DE ENTORNO */
+
+function env(String $Name, String $DefectValue = '')
+{
+    return isset($_ENV[$Name]) ? $_ENV[$Name] : $DefectValue;
+}
+
+/**
+ * ASSETS
+ */
+function assets(String $fileAssets){
+ return env("URLBASE")."assets/".$fileAssets;
 }

@@ -1,3 +1,3 @@
 <?php
 
-define("APP_DIRECTORIO_VIEWS","resources.views.");
+define("BASE_URL",env("URLBASE","http://localhost"));

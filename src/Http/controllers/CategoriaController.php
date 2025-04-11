@@ -1,6 +1,7 @@
 <?php
 namespace src\Http\controllers;
 
+use src\Http\business\CategoriaBusines;
 use src\models\Categoria;
 use src\models\Producto;
 
@@ -10,18 +11,48 @@ class CategoriaController extends Controller{
      * Método para mostrar la vista de categorias
      */
     public function index(){
-        View_("categorias.index"); 
+ 
+        $categorias = Categoria::get();
+        View_("categorias.index",compact("categorias")); 
     }
 
+    /**
+     * CREAR NUEVAS CATEGORIAS
+     */
+    public function create(){
+         View_("categorias.create");
+    }
+
+   
     /**
      * Metodo para registrar categorías
      */
     public function store(){
         if($this->VerifyCsrfToken($this->post("token_"))){
-            echo $this->input("apellidos")."   ".$this->input("nombres");  
+            $response = CategoriaBusines::save($this->post("nombre_categoria"));
+
+            if($response === 'vacio'){
+                $this->Sesion("error","Ingrese nombre de la categoría!!!");
+                Pageredirect("categoria/create");
+                exit;
+            }
+
+            if($response === 'ok'){
+                $this->Sesion("success","Categoría registrado correctamente!!");
+                Pageredirect("categorias");
+                exit;
+            }else{
+                if($response === 'existe'){
+                    $this->Sesion("existe","La categoría que deseas registrar ya existe!!!");  
+                }else{
+                    $this->Sesion("error","Error al crear categoría!!!");
+                }
+            }
         }else{
-            echo "error token csrf!!!";
+            $this->Sesion("error","Token invalid!!!");
         }
+
+        Pageredirect("categoria/create");
     }
 
     public function prueba(){
@@ -60,5 +91,58 @@ class CategoriaController extends Controller{
          echo assets("plugins/fontawesome-free/css/all.min.css");
     }
 
+    /**
+     * EDITAR LAS CATEGORIAS
+     */
+    public function editar($id){
+        $categoria = Categoria::Where("id_categoria","=",$id)->get();
+        if($categoria){
+            View_("categorias.editar",compact("categoria"));
+        }else{
+            Pageredirect("categorias");
+        }
+    }
+
+
+     /**
+     * Metodo para registrar categorías
+     */
+    public function update($id){
+        if($this->VerifyCsrfToken($this->post("token_"))){
+            $response = CategoriaBusines::modificar($this->post("nombre_categoria"),$id);
+
+            if($response === 'vacio'){
+                $this->Sesion("error","Ingrese nombre de la categoría!!!");
+                Pageredirect("categoria/".$id."/editar");
+                exit;
+            }
+
+            if($response === 'ok'){
+                $this->Sesion("success","Categoría modificado correctamente!!");
+                Pageredirect("categorias");
+                exit;
+            }else{
+                    $this->Sesion("error","Error al modificar categoría!!!");
+            }
+        }else{
+            $this->Sesion("error","Token invalid!!!");
+        }
+
+        Pageredirect("categoria/".$id."/editar");
+    }
+
+
+    /**
+     * eliminar categoria de la lista (softdelete) => eliminacion suave
+     */
+    public function eliminar($id){
+        if($this->VerifyCsrfToken($this->post("token_"))){
+             $response = CategoriaBusines::eliminar($id,$this->FechaActual("Y-m-d H:m:i"));
+             
+              json(["response" => $response]);
+        }else{
+           json(["error" => "token-invalid!!"]); 
+        }    
+    }
     
 }

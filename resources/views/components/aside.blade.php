@@ -22,11 +22,10 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{redirect("categorias")}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Simple Link
-                
+                categorias
               </p>
             </a>
           </li>

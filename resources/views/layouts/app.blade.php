@@ -15,19 +15,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{assets("plugins/fontawesome-free/css/all.min.css")}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{assets("dist/css/adminlte.min.css")}}">
+  {{--SWEET ALERT 2 CSS---}}
+  <link rel="stylesheet" href="{{assets("sweetalert2/sweetalert2.min.css")}}">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <!-- Navbar -->
-   @include('resources/views/components/nav.blade.php'){{-- nav--}}
+   @include(component("nav")){{-- nav--}}
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
   
-  @include('resources/views/components/aside.blade.php')
+  @include(component("aside"))
   <!-- Content Wrapper. Contains page content -->
-  @include('resources/views/components/wrapper.blade.php')
+  @include(component("wrapper"))
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
@@ -41,7 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  @include('resources/views/components/footer.blade.php')
+  @include(component("footer"))
 </div>
 <!-- ./wrapper -->
 
@@ -53,5 +55,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{assets("plugins/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
 <!-- AdminLTE App -->
 <script src="{{assets("dist/js/adminlte.min.js")}}"></script>
+
+<script src="{{assets("sweetalert2/sweetalert2.min.js")}}"></script>
+@yield('js')
 </body>
 </html>

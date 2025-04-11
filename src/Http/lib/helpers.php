@@ -38,3 +38,43 @@ function env(String $Name, String $DefectValue = '')
 function assets(String $fileAssets){
  return env("URLBASE")."assets/".$fileAssets;
 }
+
+function component(String $fileComponent){
+
+    $DirectorioComponents = str_replace(".","/","resources.views.components.".$fileComponent);
+    $extension = file_exists($DirectorioComponents.".blade.php") ? ".blade.php" : ".php";
+     
+    if(file_exists($DirectorioComponents.".blade.php") || file_exists($DirectorioComponents.".php")){
+      return  $DirectorioComponents.$extension;
+    }
+}
+
+function layouts(String $fileComponent){
+
+    $DirectorioLayout = str_replace(".","/","resources.views.layouts.".$fileComponent);
+    $extension = file_exists($DirectorioLayout.".blade.php") ? ".blade.php" : ".php";
+     
+    if(file_exists($DirectorioLayout.".blade.php") || file_exists($DirectorioLayout.".php")){
+      return  $DirectorioLayout.$extension;
+    }
+}
+
+
+function Pageredirect(String $PageRedirect="#"){
+
+    header("location:".BASE_URL.$PageRedirect);
+}
+
+function redirect(string $redirect="#"){
+    return BASE_URL.$redirect;
+}
+
+/**
+ * No devuelve la respuesta en un formato json
+ */
+
+function json(array $dato,int $CodeResponse = 200){
+    http_response_code($CodeResponse);
+
+    echo json_encode($dato);
+}

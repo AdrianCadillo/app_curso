@@ -20,11 +20,8 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-        <div class="row">
            @yield('content')
-        </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div> 
     </div>
     <!-- /.content -->
   </div>

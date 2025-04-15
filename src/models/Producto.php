@@ -8,4 +8,5 @@ class Producto extends Model{
     //protected static String $Table = "usuarios";
     protected static String $Alias = "p";
  
+    protected static String $primaryKey = 'id_producto';
 }

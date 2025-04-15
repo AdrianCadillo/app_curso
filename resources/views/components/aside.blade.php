@@ -29,6 +29,15 @@
               </p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{redirect("productos")}}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Productos
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

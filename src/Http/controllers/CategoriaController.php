@@ -144,5 +144,23 @@ class CategoriaController extends Controller{
            json(["error" => "token-invalid!!"]); 
         }    
     }
+
+    /** ACTIVAR LA CATEGORIA */
+    public function activar($id){
+        if($this->VerifyCsrfToken($this->post("token_"))){
+            json(["response" => CategoriaBusines::ActivarCategoria($id)]);
+        }else{
+            json(["error_token"=>"token invalid!!"]);
+        }
+    }
+
+    /** FORZAR ELIMINADO DE LA BASE DE DATOS */
+    public function borrar($id){
+        if($this->VerifyCsrfToken($this->post("token_"))){
+            json(["response" => CategoriaBusines::borrarCategoria($id)]);
+        }else{
+            json(["error_token"=>"token invalid!!"]);
+        }
+    }
     
 }

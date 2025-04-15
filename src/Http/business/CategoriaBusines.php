@@ -42,4 +42,16 @@ class CategoriaBusines {
  
         return Categoria::Update(["id_categoria" =>$id ,"deleted_at" =>$fecha]) ? 'ok'  : 'error';
      }
+
+     public static function ActivarCategoria($id):String{
+
+        return Categoria::Update([
+            "id_categoria" => $id,
+            "deleted_at" => null
+        ]) ? 'ok' : 'error';
+     }
+
+     public static function borrarCategoria($id){
+        return Categoria::delete($id) ? 'ok' :'error';
+     }
 }

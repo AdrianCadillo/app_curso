@@ -17,3 +17,5 @@ $router->get("/dashboard","DashboardController@index");
 $router->get("/productos","ProductoController@index");
 $router->get("/productos/all","ProductoController@mostrar");
 $router->post("/producto/store","ProductoController@store");
+$router->post("/producto/{id}/update","ProductoController@updateProducto");
+$router->post("/producto/{id}/eliminar","ProductoController@eliminar");

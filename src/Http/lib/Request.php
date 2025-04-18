@@ -36,4 +36,16 @@ trait Request{
         return null;
     }
 
+    public function getFileName(String $NameInput){
+         return $_FILES[$NameInput]["name"];
+    }
+
+    public function getFileSize(String $NameInput){
+        return $_FILES[$NameInput]["size"];
+    }
+
+    public function getContentFile(String $NameInput){
+        return $_FILES[$NameInput]["tmp_name"];
+    }
+
 }

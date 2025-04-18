@@ -118,8 +118,8 @@ class Model extends Conexion implements Orm{
 
           return self::$pps->execute();
         } catch (\Throwable $th) {
-            echo "<h1 style='color:red'>".$th->getMessage()."</h1>";
-            exit;
+            return false;
+        
         }finally{
             self::closeConection();
         }

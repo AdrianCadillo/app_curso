@@ -23,3 +23,25 @@ function SpanishDataTable(){
         }
     }
 }
+
+/**
+ * Preview de la imagen al seleccionarlo
+ */
+function PreviewImg(evento,idImagen){
+    let Archivo = evento.target.files[0]; /// nombreimagen.jpg
+      let Extension = Archivo.name.split(".")[1];
+      
+      ExtensionesAceptables = ["png","jpg","jpeg"];
+
+      if(ExtensionesAceptables.indexOf(Extension) == -1){
+        Swal.fire({
+            title:"Mensaje del sistema!!",
+            text:"El archivo seleccionado no es correcto, solo se aceptan los tipos de archivo "+ExtensionesAceptables.join("-"),
+            icon:"error"
+        }).then(function(){
+            $('#'+idImagen).attr("src","{{assets('dist/img/defecto.png')}}");
+        });
+      }else{
+        $('#'+idImagen).attr("src",URL.createObjectURL(Archivo));
+    }
+}

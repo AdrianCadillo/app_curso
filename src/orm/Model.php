@@ -33,6 +33,8 @@ class Model extends Conexion implements Orm{
             exit;
         }finally{
             self::closeConection();
+            self::$Values =[];
+            self::$Query="";
         }
     }
 
@@ -122,6 +124,7 @@ class Model extends Conexion implements Orm{
         
         }finally{
             self::closeConection();
+            self::$Query="";
         }
 
      }

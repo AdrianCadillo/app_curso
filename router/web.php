@@ -1,4 +1,6 @@
 <?php
+
+ 
 if(PHP_SESSION_ACTIVE != session_status()){
     session_start();
 }
@@ -19,3 +21,13 @@ $router->get("/productos/all","ProductoController@mostrar");
 $router->post("/producto/store","ProductoController@store");
 $router->post("/producto/{id}/update","ProductoController@updateProducto");
 $router->post("/producto/{id}/eliminar","ProductoController@eliminar");
+
+
+/** AUTHENTICACION */
+$router->get("/login","AuthController@index");
+$router->get("/user/register","AuthController@createAccount");
+$router->post("/user/store","AuthController@store");
+
+$router->get("/user/active/account","AuthController@ActivarCuenta");
+
+$router->post("/activar-cuenta-usuario","AuthController@activarUser");

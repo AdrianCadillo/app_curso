@@ -78,3 +78,8 @@ function json(array $dato,int $CodeResponse = 200){
 
     echo json_encode($dato);
 }
+
+/** GENERAR CODIGO */
+function GenerateCodeToken(String $Texto = "abcdefghijklmnopqrstuvwxyz0123456789",$Inicio=0,$Final=6){
+    return  substr(str_shuffle($Texto),$Inicio,$Final);
+}

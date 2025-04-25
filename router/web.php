@@ -13,7 +13,7 @@ $router->post("/categoria/{id}/eliminar","CategoriaController@eliminar");
 $router->post("/categoria/{id}/activar","CategoriaController@activar");
 $router->post("/categoria/{id}/borrar","CategoriaController@borrar");
 
-$router->get("/dashboard","DashboardController@index");
+$router->get("/dashboard","HomeController@home");
 
 /// productos
 $router->get("/productos","ProductoController@index");
@@ -31,3 +31,11 @@ $router->post("/user/store","AuthController@store");
 $router->get("/user/active/account","AuthController@ActivarCuenta");
 
 $router->post("/activar-cuenta-usuario","AuthController@activarUser");
+
+/// LOGIN
+$router->post("/hacer-login","LoginController@login");
+
+$router->post("/logout","LoginController@cerrar_sistema");
+
+/// GESTION DE USUARIOS
+$router->get("/gestion-de-usuarios","UserController@index");

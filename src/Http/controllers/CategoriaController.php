@@ -11,7 +11,7 @@ class CategoriaController extends Controller{
      * Método para mostrar la vista de categorias
      */
     public function index(){
- 
+        $this->NoAuth();
         $categorias = Categoria::get();
         View_("categorias.index",compact("categorias")); 
     }
@@ -20,6 +20,7 @@ class CategoriaController extends Controller{
      * CREAR NUEVAS CATEGORIAS
      */
     public function create(){
+         $this->NoAuth();
          View_("categorias.create");
     }
 
@@ -95,6 +96,7 @@ class CategoriaController extends Controller{
      * EDITAR LAS CATEGORIAS
      */
     public function editar($id){
+        $this->NoAuth();
         $categoria = Categoria::Where("id_categoria","=",$id)->get();
         if($categoria){
             View_("categorias.editar",compact("categoria"));

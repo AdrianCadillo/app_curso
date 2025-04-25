@@ -60,10 +60,11 @@ class AuthBusines{
     }
 
     /** ACTIVAR LA CUENTA DEL USUARIO */
-    public static function activarCuenta($id){
+    public static function activarCuenta($id,String $Fecha){
         return User::Update([
             "id_usuario" => $id,
-            "estado" => "a"
+            "estado" => "a",
+            "email_verified" => $Fecha
         ]) ? 'ok' : 'error';
     }
 }

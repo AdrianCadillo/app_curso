@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="{{assets("plugins/icheck-bootstrap/icheck-bootstrap.min.css")}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{assets("dist/css/adminlte.min.css")}}">
+    {{--SWEET ALERT 2 CSS---}}
+    <link rel="stylesheet" href="{{assets("sweetalert2/sweetalert2.min.css")}}">
 </head>
 <body >
 
@@ -28,9 +30,10 @@
           <div class="card-body login-card-body">
             <p class="login-box-msg">Ingrese sus credenciales.!</p>
       
-            <form action="../../index3.html" method="post">
+            <form action="../../index3.html" method="post" id="form_login">
+              <input type="hidden" name="token_" value="{{$this->Csrf_Token()}}">
               <div class="input-group mb-3">
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="text" name="login" id="login" class="form-control" placeholder="Email|Username">
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-envelope"></span>
@@ -38,7 +41,7 @@
                 </div>
               </div>
               <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="password" name="password" id="password" class="form-control" placeholder="Password">
                 <div class="input-group-append">
                   <div class="input-group-text">
                     <span class="fas fa-lock"></span>
@@ -56,7 +59,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-4">
-                  <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+                  <button type="submit" id="realizar_login" class="btn btn-primary btn-block">Entrar</button>
                 </div>
                 <!-- /.col -->
               </div>
@@ -77,5 +80,12 @@
 <script src="{{assets("plugins/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
 <!-- AdminLTE App -->
 <script src="{{assets("dist/js/adminlte.min.js")}}"></script>
+<script src="{{assets("axios/dist/axios.min.js")}}"></script>
+
+<script src="{{assets("sweetalert2/sweetalert2.min.js")}}"></script>
+<script src="{{assets("busines/auth.js")}}"></script>
+<script>
+  var RUTA = "{{BASE_URL}}";
+</script>
 </body>
 </html>

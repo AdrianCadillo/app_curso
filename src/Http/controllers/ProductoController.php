@@ -13,12 +13,14 @@ class ProductoController extends Controller{
     /** METODO PARA MOSTRAR LA PÁGINA PRINCIPAL DE PRODUCTOS */
     public function index(){
 
+        $this->NoAuth();
         $categorias = Categoria::get();
         View_("producto.index",compact("categorias"));
     }
 
     /** MOSTRAR LOS PRODUCTOS DE LA BASE DE DATOS */
     public function mostrar(){
+        $this->NoAuth();
         $productos = Producto::
                   select("cat.id_categoria","cat.nombre_categoria","p.id_producto","p.nombre_producto","p.precio",
                   "p.stock","p.descripcion","p.imagen","p.deleted_at")

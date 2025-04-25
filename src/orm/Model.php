@@ -180,6 +180,7 @@ class Model extends Conexion implements Orm{
               exit;
           }finally{
               self::closeConection();
+              self::$Query="";
           }
       }
 

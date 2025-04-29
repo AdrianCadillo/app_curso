@@ -12,8 +12,12 @@ class CategoriaController extends Controller{
      */
     public function index(){
         $this->NoAuth();
-        $categorias = Categoria::get();
-        View_("categorias.index",compact("categorias")); 
+        if($this->getUser()[0]->rol === 'a'){
+            $categorias = Categoria::get();
+            View_("categorias.index",compact("categorias")); 
+        }else{
+            echo "NO ESTAS AUTHORIZADO PARA VER ESTA PAGINA!!!";
+        }
     }
 
     /**

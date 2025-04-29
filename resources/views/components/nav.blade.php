@@ -20,13 +20,13 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
          @php
-          $Foto = $this->getUser()[0]->foto != null ? '' : assets("dist/img/useranonimo.png");
+          $Foto = $this->getUser()[0]->foto != null ? assets("img/users/".$this->getUser()[0]->foto) : assets("dist/img/useranonimo.png");
           @endphp
         <img src="{{$Foto}}" class="img-circle elevation-2" alt="User Image"
         style="width: 40px;">
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-header"><b>{{$this->getUser() === 'a' ? 'ADMINISTRADOR' : 'CLIENTE'}}</b></span>
+          <span class="dropdown-header"><b>{{$this->getUser()[0]->rol === 'a' ? 'ADMINISTRADOR' : 'CLIENTE'}}</b></span>
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <i class="fas fa-envelope mr-2"></i> Mi Perfíl

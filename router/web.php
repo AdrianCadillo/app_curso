@@ -42,3 +42,5 @@ $router->get("/gestion-de-usuarios","UserController@index");
 $router->get("/mostrar-usuarios","UserController@showUsers");
 $router->post("/user/save","UserController@store");
 $router->post("/user/{id}/delete","UserController@eliminar");
+
+ 

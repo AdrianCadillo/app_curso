@@ -110,4 +110,49 @@ class UserController extends Controller{
         json(["error" => "ERROR, TOKEN ES INCORRECTO!!!"]);
       }
     }
+ 
+    public function prueba(){
+        echo "<pre>";
+          $response = User::procedure("proc_gestion","C",["i-c","Categoría de prueba"]);
+          echo $response[0]->respuesta;
+        echo "</pre>";
+    }
+
+    /** MODIFICAR AL USUARIO*/
+    public function modificarUsuario($id){
+      if($this->VerifyCsrfToken($this->post("token_"))){
+         $this->setNameFile("foto_editar");
+         $this->setDestino("assets/img/users/");
+
+         $response = $this->UploadFile();
+
+         $user = User::Where("id_usuario","=",$id)->get();
+
+         if($response != 'vacio'){
+            if($user[0]->foto != null){
+                $pathFoto =  "assets/img/users/".$user[0]->foto;
+                unlink(($pathFoto));
+            }
+         }else{
+            $this->setNombreDelArchivo($user[0]->foto);
+         }
+
+         $responseUser = User::Update([
+            "id_usuario" => $id,
+            "username" => self::post("username_editar"),
+            "email" => self::post("email_editar"),
+            "rol" => self::post("rol_editar"),
+            "foto" => $this->getNombreDelArchivo()
+         ]);  
+
+         if($responseUser){
+            json(["success" => "DATOS DEL USUARIO MODIFICADOS!!!"]);
+         }else{
+            json(["error" => "ERROR AL MODIFICAR DATOS DEL USUARIO!!"]);
+         }
+
+      }else{
+        json(["error" => "ERROR, TOKEN INCORRECTO!!!"]);
+      } 
+    }
 }

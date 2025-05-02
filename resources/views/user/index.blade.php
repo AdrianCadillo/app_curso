@@ -80,6 +80,52 @@
         </div>
     </div>
 </div>
+
+{{--EDITAR USUARIOS---}}
+<div class="modal fade" id="modal_editar_user" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Editar usuario</h5>
+            </div>
+
+            <div class="modal-body">
+                <form action="" method="post" id="form_update_user">
+                    <input type="hidden" name="token_" value="{{$this->Csrf_Token()}}">
+                    <div class="form-group">
+                        <label for="username_editar" class="form-label"><b>NOMBRE DE USUARIO <span class="text-danger">*</span></b></label>
+                        <input type="text" id="username_editar" name="username_editar" class="form-control" placeholder="Nombre de usuario...."> 
+                        <span id="error_username_editar" class="text-danger"></span>
+                     </div>
+
+                    <div class="form-group">
+                        <label for="email_editar" class="form-label"><b>CORREO ELECTRÓNICO <span class="text-danger">*</span></b></label>
+                        <input type="text" id="email_editar" name="email_editar" class="form-control" placeholder="Email de usuario...."> 
+                        <span id="error_email_editar" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rol_editar" class="form-label"><b>ROL<span class="text-danger">*</span></b></label>
+                        <select name="rol_editar" id="rol_editar" class="form-select">
+                            <option value="a">ADMINISTRADOR</option>
+                            <option value="u">CLIENTE</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="foto_editar" class="form-label"><b>SELECCIONE UNA FOTO <span class="text-danger">*</span></b></label>
+                        <input type="file" id="foto_editar" name="foto_editar" class="form-control"> 
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-success" id="update_user">Guardar</button>
+                <button class="btn btn-danger" id="cerrar_editar">Salir</button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('js')
@@ -106,9 +152,19 @@
         $('#form_save_user')[0].reset();
     });
 
+    $('#cerrar_editar').click(function(){
+        $('#modal_editar_user').modal("hide");
+        USERID = null;
+        $('#form_update_user')[0].reset();
+    });
+
     /// GUARDAR USUARIO
     $('#save_user').click(function(){
         saveUser();
+    });
+
+    $('#update_user').click(function(){
+        updateUser(USERID);
     });
  });
  

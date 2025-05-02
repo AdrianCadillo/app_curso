@@ -230,4 +230,39 @@ class Model extends Conexion implements Orm{
             self::$Query = "SELECT * FROM ".static::$Table." as ".static::$Alias;
         }
     }
+
+    /**
+     * CALL procedimiento(?,?,?)
+     */
+    public static function procedure(String $NameProcedure,String $Evento,array $datos=[]){
+        self::$Query = "call ".$NameProcedure."(";
+
+        try {
+            for($i = 0; $i<count($datos);$i++){
+                self::$Query.="?,";
+            }
+    
+              self::$Query = rtrim(self::$Query,",").")";
+    
+              self::$pps = self::getConexion()->prepare(self::$Query);
+    
+              for($i = 0; $i<count($datos);$i++){
+                self::$pps->bindValue(($i+1),$datos[$i]);
+              }
+    
+              if(strtolower($Evento) === "c"){
+                self::$pps->execute();
+                return self::$pps->fetchAll(\PDO::FETCH_OBJ);
+              }
+    
+              return self::$pps->execute(); /// i,a,e
+        } catch (\Throwable $th) {
+           echo $th->getMessage();
+           exit;
+        }finally{
+            self::closeConection();
+        }
+    }
+
 }
+ 

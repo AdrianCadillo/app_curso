@@ -48,7 +48,59 @@ function showUsers(){
       ],
     }).ajax.reload();
     ConfirmEliminadoUser(TablaGestionUsers,'#gestion_users tbody');
+    EditarUser(TablaGestionUsers,'#gestion_users tbody');
 }
+
+
+
+//EDITAR AL USUARIO
+function EditarUser(Tabla,Tbody){
+    $(Tbody).on('click','#editar',function(){
+        // fila seleccionada
+        let fila = $(this).parents("tr");
+
+        if(fila.hasClass("child")){
+            fila = fila.prev();
+        }
+
+        $('#modal_editar_user').modal("show");
+        let Data = Tabla.row(fila).data();
+
+        $('#username_editar').val(Data.username);
+        $('#email_editar').val(Data.email);
+        $('#rol_editar').val(Data.rol);
+
+        USERID = Data.id_usuario;
+    });
+}
+
+// modificar los datos del usuario
+function updateUser(id){
+    let FormUpdateUser = new FormData(document.getElementById("form_update_user"));
+    axios({
+        url:RUTA+"user/update/"+id,
+        method:"POST",
+        data:FormUpdateUser
+    }).then(function(response){
+        if(response.data.error != undefined){
+            Swal.fire({
+                title:"MENSAJE DEL SISTEMA!!!",
+                text:response.data.error,
+                icon:"error"
+            });
+        }else{
+            Swal.fire({
+                title:"MENSAJE DEL SISTEMA!!!",
+                text:response.data.success,
+                icon:"success"
+            }).then(function(){
+                showUsers();
+            }); 
+        }
+    });
+}
+
+
 
 
 /// CONFIRMAR ANTES DE ELIMINAR AL USUARIO

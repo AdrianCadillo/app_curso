@@ -18,5 +18,6 @@ require 'config/database.php';
 
 $router = new Router;
 require 'router/web.php';
+require 'router/ejemplo.php';
 $router->run();
  

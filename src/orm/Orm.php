@@ -35,6 +35,8 @@ interface Orm{
      public static function LeftJoin(String $TFK,String $ColumnaFK,String $operador,String $ColumnaPK);
 
      public static function RightJoin(String $TFK,String $ColumnaFK,String $operador,String $ColumnaPK);
+
+     public static function procedure(String $NameProcedure,String $Evento,array $datos=[]);
      
 }
 

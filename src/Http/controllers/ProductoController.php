@@ -20,7 +20,7 @@ class ProductoController extends Controller{
 
     /** MOSTRAR LOS PRODUCTOS DE LA BASE DE DATOS */
     public function mostrar(){
-        $this->NoAuth();
+        //$this->NoAuth();
         $productos = Producto::
                   select("cat.id_categoria","cat.nombre_categoria","p.id_producto","p.nombre_producto","p.precio",
                   "p.stock","p.descripcion","p.imagen","p.deleted_at")
